@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sổ sức khoẻ</title>
+<meta name="apple-mobile-web-app-title" content="Sổ sức khoẻ">
+<meta name="theme-color" content="#F6E7C1">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script>
+  // Link tới app trên claude.ai (bản dùng thử)
+  var APP = "https://claude.ai/artifact/DizYwjegXk4yfizVhfx757";
+</script>
+<style>
+  :root{--bg:#FBF4E4;--ink:#3B2A12;--mut:#7A6440;--card:#FFFDF7;--acc:#D9921E;--line:#EBDDBE}
+  @media (prefers-color-scheme:dark){:root{--bg:#1E1810;--ink:#F5EAD3;--mut:#C3AE86;--card:#2A2216;--acc:#E9A93A;--line:#3D3220}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,system-ui,"Segoe UI",Roboto,sans-serif;padding:32px 16px 48px}
+  main{max-width:440px;margin:0 auto;text-align:center}
+  .ic{width:96px;height:96px;border-radius:22px;box-shadow:0 6px 20px rgba(120,80,10,.18)}
+  h1{font-size:24px;margin:16px 0 4px}
+  p.sub{color:var(--mut);margin:0 0 24px}
+  .btn{display:block;background:var(--acc);color:#fff;text-decoration:none;font-weight:600;padding:14px;border-radius:14px;margin:0 0 24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-align:left;margin-bottom:12px}
+  .card h2{font-size:16px;margin:0 0 8px}
+  ol{margin:0;padding-left:20px} li{margin:4px 0}
+  .note{font-size:14px;color:var(--mut)}
+  .btn2{display:block;width:100%;font:inherit;font-weight:600;color:var(--acc);background:transparent;border:2px solid var(--acc);padding:12px;border-radius:14px;margin:8px 0 16px;cursor:pointer}
+  .ok{color:#2F7D3A;font-weight:600;margin:8px 0 16px}
+  .hide{display:none}
+</style>
+</head>
+<body>
+<main>
+  <img class="ic" src="icon-512.png" alt="">
+  <h1>Sổ sức khoẻ</h1>
+  <p class="sub">Đưa app ra màn hình chính để mở nhanh</p>
+
+  <a class="btn" id="open" href="#" target="_blank" rel="noopener">Mở Sổ sức khoẻ</a>
+
+  <div class="card" id="ios">
+    <h2>iPhone · Safari</h2>
+    <ol>
+      <li>Bấm nút <b>Chia sẻ</b> (ô vuông có mũi tên lên).</li>
+      <li>Chọn <b>Thêm vào màn hình chính</b>.</li>
+      <li>Nếu thấy công tắc <b>Mở dưới dạng ứng dụng web</b>, hãy <b>tắt</b> nó.</li>
+      <li>Bấm <b>Thêm</b>.</li>
+    </ol>
+  </div>
+  <div class="card" id="and">
+    <h2>Android · Chrome</h2>
+    <ol>
+      <li>Bấm nút <b>⋮</b> ở góc trên.</li>
+      <li>Chọn <b>Thêm vào màn hình chính</b> → <b>Tạo lối tắt</b>.</li>
+    </ol>
+  </div>
+  <p class="note">Từ icon trên màn hình chính, app sẽ mở thẳng. Lần đầu cần đăng nhập Claude bằng đúng email đã được mời.</p>
+</main>
+<script>
+  document.getElementById('open').href = APP;
+  // Đổi địa chỉ đang hiện thành trang gốc (luôn tự chuyển vào app),
+  // để icon lưu ra màn hình chính trỏ về trang gốc.
+  try { history.replaceState(null, "", "./"); } catch (e) {}
+  var ua = navigator.userAgent;
+  if (/Android/i.test(ua)) document.getElementById('ios').className += ' hide';
+  else if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById('and').className += ' hide';
+</script>
+</body>
+</html>

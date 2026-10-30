@@ -1,7 +1,7 @@
 {
   "name": "Sổ sức khoẻ",
   "short_name": "Sổ sức khoẻ",
-  "start_url": "./?go=1",
+  "start_url": "./",
   "display": "browser",
   "background_color": "#FBF4E4",
   "theme_color": "#F6E7C1",
