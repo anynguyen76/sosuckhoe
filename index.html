@@ -29,6 +29,8 @@
   .card h2{font-size:16px;margin:0 0 8px}
   ol{margin:0;padding-left:20px} li{margin:4px 0}
   .note{font-size:14px;color:var(--mut)}
+  .btn2{display:block;width:100%;font:inherit;font-weight:600;color:var(--acc);background:transparent;border:2px solid var(--acc);padding:12px;border-radius:14px;margin:8px 0 16px;cursor:pointer}
+  .ok{color:#2F7D3A;font-weight:600;margin:8px 0 16px}
   .hide{display:none}
 </style>
 </head>
@@ -43,6 +45,7 @@
   <div class="card" id="ios">
     <h2>iPhone · Safari</h2>
     <ol>
+      <li>Bấm nút <b>Chuẩn bị</b> bên dưới.</li>
       <li>Bấm nút <b>Chia sẻ</b> (ô vuông có mũi tên lên).</li>
       <li>Chọn <b>Thêm vào màn hình chính</b>.</li>
       <li>Nếu thấy công tắc <b>Mở dưới dạng ứng dụng web</b>, hãy <b>tắt</b> nó.</li>
@@ -52,16 +55,24 @@
   <div class="card" id="and">
     <h2>Android · Chrome</h2>
     <ol>
+      <li>Bấm nút <b>Chuẩn bị</b> bên dưới.</li>
       <li>Bấm nút <b>⋮</b> ở góc trên.</li>
       <li>Chọn <b>Thêm vào màn hình chính</b> → <b>Tạo lối tắt</b>.</li>
     </ol>
   </div>
+  <button class="btn2" id="prep">Chuẩn bị thêm vào màn hình chính</button>
+  <p class="ok hide" id="ready">✓ Đã sẵn sàng. Giờ làm tiếp các bước còn lại ở trên.</p>
   <p class="note">Từ icon trên màn hình chính, app sẽ mở thẳng. Lần đầu cần đăng nhập Claude bằng đúng email đã được mời.</p>
 </main>
 <script>
   document.getElementById('open').href = APP;
-  // Đổi địa chỉ hiện tại thành ?go=1 để icon lưu ra màn hình chính sẽ mở thẳng app
-  try { if (!/[?&]go=1/.test(location.search)) history.replaceState(null, "", "?go=1"); } catch (e) {}
+  // Chỉ khi người dùng bấm "Chuẩn bị": đổi địa chỉ thành ?go=1,
+  // để icon lưu ra màn hình chính sẽ mở thẳng app. Mở link thường thì không tự chuyển.
+  document.getElementById('prep').onclick = function () {
+    try { history.replaceState(null, "", "?go=1"); } catch (e) {}
+    this.className += ' hide';
+    document.getElementById('ready').className = 'ok';
+  };
   var ua = navigator.userAgent;
   if (/Android/i.test(ua)) document.getElementById('ios').className += ' hide';
   else if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById('and').className += ' hide';
